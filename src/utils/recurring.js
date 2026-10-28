@@ -1,8 +1,9 @@
-export function monthlyValue(
+export function monthlyEquivalent(
   amount,
   frequency
 ) {
   switch (frequency) {
+
     case "weekly":
       return (amount * 52) / 12;
 
@@ -20,5 +21,30 @@ export function monthlyValue(
 
     default:
       return amount;
+  }
+}
+
+export function frequencyLabel(
+  frequency
+) {
+  switch (frequency) {
+
+    case "weekly":
+      return "Weekly";
+
+    case "fortnightly":
+      return "Fortnightly";
+
+    case "monthly":
+      return "Monthly";
+
+    case "quarterly":
+      return "Quarterly";
+
+    case "yearly":
+      return "Yearly";
+
+    default:
+      return "Monthly";
   }
 }
