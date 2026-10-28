@@ -1,57 +1,133 @@
 export const starterData = {
   settings: {
     theme: "sage",
-    darkMode: false
+    darkMode: false,
   },
 
-household: {
-  name: "My Household"
-},
-
-members: [
-  {
-    id: 1,
-    name: "Adult 1",
-    role: "Parent",
-    contributor: true
+  household: {
+    name: "Household Hive",
   },
-  {
-    id: 2,
-    name: "Adult 2",
-    role: "Parent",
-    contributor: true
-  },
-  {
-    id: 3,
-    name: "Child 1",
-    role: "Child",
-    contributor: false
-  }
-],
 
-contributors: [
-  {
-    id: 1,
-    income: 1050,
-    incomeFrequency: "weekly",
+  members: [
+    {
+      id: 1,
+      name: "Sharni",
+      role: "Parent",
 
-    personalExpenses: 300,
-    personalExpenseFrequency: "monthly"
-  },
-  {
-    id: 2,
-    income: 4000,
-    incomeFrequency: "monthly",
+      contributor: true,
 
-    personalExpenses: 150,
-    personalExpenseFrequency: "monthly"
-  }
-],
+      memberExpense: 0,
+      memberExpenseFrequency: "monthly",
+    },
 
+    {
+      id: 2,
+      name: "Partner",
+      role: "Parent",
 
-  expenses: [],
+      contributor: true,
+
+      memberExpense: 0,
+      memberExpenseFrequency: "monthly",
+    },
+
+    {
+      id: 3,
+      name: "Leo",
+      role: "Child",
+
+      contributor: false,
+
+      memberExpense: 80,
+      memberExpenseFrequency: "weekly",
+    },
+  ],
+
+  contributors: [
+    {
+      id: 1,
+
+      income: 2250,
+      incomeFrequency: "fortnightly",
+
+      personalExpenses: 300,
+      personalExpenseFrequency: "monthly",
+    },
+
+    {
+      id: 2,
+
+      income: 4000,
+      incomeFrequency: "monthly",
+
+      personalExpenses: 150,
+      personalExpenseFrequency: "monthly",
+    },
+  ],
+
+  expenses: [
+    {
+      id: 1,
+
+      name: "Mortgage",
+
+      amount: 2500,
+      frequency: "monthly",
+
+      assignments: [
+        {
+          contributorId: 1,
+          value: 40,
+        },
+        {
+          contributorId: 2,
+          value: 60,
+        },
+      ],
+    },
+
+    {
+      id: 2,
+
+      name: "Groceries",
+
+      amount: 1000,
+      frequency: "monthly",
+
+      assignments: [
+        {
+          contributorId: 1,
+          value: 50,
+        },
+        {
+          contributorId: 2,
+          value: 50,
+        },
+      ],
+    },
+
+    {
+      id: 3,
+
+      name: "Internet",
+
+      amount: 99,
+      frequency: "monthly",
+
+      assignments: [
+        {
+          contributorId: 1,
+          value: 50,
+        },
+        {
+          contributorId: 2,
+          value: 50,
+        },
+      ],
+    },
+  ],
 
   goals: [],
 
-  scenarios: []
+  scenarios: [],
 };

@@ -29,36 +29,35 @@ export default function App() {
         : "light"
     ];
 
-  const totals = useMemo(
-    () => calculateTotals(data),
-    [data]
-  );
+  const totals = useMemo(() => {
+    return calculateTotals(data);
+  }, [data]);
 
   const cycleTheme = () => {
-    const options = [
+    const themesList = [
       "sage",
       "coastal",
       "lavender",
-      "peach"
+      "peach",
     ];
 
     const currentIndex =
-      options.indexOf(
+      themesList.indexOf(
         data.settings.theme
       );
 
     const nextTheme =
-      options[
+      themesList[
         (currentIndex + 1) %
-          options.length
+          themesList.length
       ];
 
     setData({
       ...data,
       settings: {
         ...data.settings,
-        theme: nextTheme
-      }
+        theme: nextTheme,
+      },
     });
   };
 
@@ -68,150 +67,129 @@ export default function App() {
       settings: {
         ...data.settings,
         darkMode:
-          !data.settings.darkMode
-      }
+          !data.settings.darkMode,
+      },
     });
   };
 
-  let screen;
+  const renderScreen = () => {
+    switch (activeTab) {
+      case "home":
+        return (
+          <HomeScreen
+            totals={totals}
+            theme={theme}
+          />
+        );
 
-  switch (activeTab) {
-    case "budget":
-      screen = (
-        <BudgetScreen
-          data={data}
-          setData={setData}
-          theme={theme}
-        />
-      );
-      break;
+      case "budget":
+        return (
+          <BudgetScreen
+            data={data}
+            setData={setData}
+            theme={theme}
+          />
+        );
 
-    case "household":
-      screen = (
-        <HouseholdScreen
-          data={data}
-          setData={setData}
-          theme={theme}
-        />
-      );
-      break;
+      case "household":
+  return (
+    <HouseholdScreen
+      data={data}
+      setData={setData}
+      theme={theme}
+    />
+  );
 
-    case "goals":
-      screen = (
-        <div
-          className={`
-          ${theme.card}
-          p-6
-          rounded-3xl
-          shadow-sm
-          `}
-        >
-          <h2
-            className={theme.text}
-          >
-            Goals
-          </h2>
-
-          <p
-            className={
-              theme.muted
-            }
-          >
-            Coming in Part 3
-          </p>
-        </div>
-      );
-      break;
-
-    case "settings":
-      screen = (
-        <div className="space-y-4">
-
+      case "goals":
+        return (
           <div
             className={`
-            ${theme.card}
-            rounded-3xl
-            p-4
-            shadow-sm
+              p-4
+              rounded-xl
+              ${theme.card}
+              ${theme.text}
             `}
           >
-            <h2
-              className={`
-              text-xl
-              font-bold
-              mb-4
-              ${theme.text}
-              `}
-            >
-              Settings
-            </h2>
+            Goals Screen Coming Soon
+          </div>
+        );
 
+      case "settings":
+        return (
+          <div className="space-y-3">
             <button
               onClick={cycleTheme}
               className={`
-              ${theme.button}
-              text-white
-              w-full
-              p-3
-              rounded-xl
-              mb-3
+                w-full
+                p-3
+                rounded-xl
+                ${theme.button}
+                ${theme.buttonText}
               `}
             >
               Change Theme
             </button>
 
             <button
-              onClick={
-                toggleDarkMode
-              }
+              onClick={toggleDarkMode}
               className={`
-              ${theme.button}
-              text-white
-              w-full
-              p-3
-              rounded-xl
+                w-full
+                p-3
+                rounded-xl
+                ${theme.button}
+                ${theme.buttonText}
               `}
             >
               Toggle Dark Mode
             </button>
+
+            <div
+              className={`
+                p-4
+                rounded-xl
+                ${theme.card}
+                ${theme.text}
+              `}
+            >
+              Current Theme:
+              {" "}
+              {data.settings.theme}
+            </div>
           </div>
+        );
 
-        </div>
-      );
-      break;
-
-    default:
-      screen = (
-        <HomeScreen
-          totals={totals}
-          data={data}
-          theme={theme}
-        />
-      );
-  }
+      default:
+        return (
+          <HomeScreen
+            totals={totals}
+            theme={theme}
+          />
+        );
+    }
+  };
 
   return (
     <div
       className={`
-      min-h-screen
-      ${theme.bg}
-      transition-all
+        min-h-screen
+        ${theme.bg}
+        transition-all
       `}
     >
       <div className="max-w-md mx-auto p-4 pb-24">
 
         <h1
           className={`
-          text-3xl
-          font-bold
-          mb-6
-          ${theme.text}
+            text-3xl
+            font-bold
+            mb-6
+            ${theme.text}
           `}
         >
           Household Hive
         </h1>
 
-        {screen}
+        {renderScreen()}
 
       </div>
 
